@@ -85,7 +85,7 @@ fun ContentState(
                 )
                 Spacer(modifier = Modifier.width(24.dp))
                 Text(text = element.title)
-                Spacer(modifier = Modifier.width(24.dp))
+                Spacer(modifier = Modifier.width(72.dp))
                 val like = remember { mutableStateOf(element.like) }
                 Like(modifier = Modifier, like = like)
                 LaunchedEffect(like.value) {

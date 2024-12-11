@@ -1,5 +1,7 @@
 package com.example.firstapp
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,11 +22,25 @@ import com.example.firstapp.details.DetailsScreen
 import com.example.firstapp.details.DetailsScreenRoute
 import com.example.firstapp.main.MainScreen
 import com.example.firstapp.main.MainScreenRoute
+import com.example.firstapp.services.MusicService
 import com.example.firstapp.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(
+                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                100
+            )
+        }
+        Intent(this, MusicService::class.java).also { intent ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
+        }
         setContent {
             AppTheme {
                 // A surface container using the 'background' color from the theme
@@ -46,54 +62,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    @Composable
-    fun RowGreeting(modifier: Modifier = Modifier) {
-        Row(modifier) {
-            Greeting("Android")
-            Greeting("Android")
-        }
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AppTheme {
-        Greeting("Android")
     }
 }
