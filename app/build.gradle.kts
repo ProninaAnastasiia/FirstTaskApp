@@ -60,6 +60,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation (libs.androidx.media)
+    implementation (libs.glance.appwidget)
+    implementation (libs.androidx.glance.material3)
+    implementation (libs.androidx.glance.material)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
