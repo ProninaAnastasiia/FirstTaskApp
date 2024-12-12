@@ -6,7 +6,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -78,6 +80,8 @@ fun DetailsScreen(navController: NavController, vm: DetailsViewModel = koinViewM
         ) {
             when (val st = state.value) {
                 is DetailsState.Content -> {
+                    st.element.subtitle?.let { it1 -> Text(text = it1) }
+                    Spacer(modifier = Modifier.height(24.dp))
                     Text(text = st.element.id.toString())
                     Text(text = st.read.toString())
                 }
@@ -90,7 +94,6 @@ fun DetailsScreen(navController: NavController, vm: DetailsViewModel = koinViewM
                     CircularProgressIndicator()
                 }
             }
-            Text(text = "Some details screen")
             Progress(vm)
         }
     }

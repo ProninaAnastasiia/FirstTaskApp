@@ -13,6 +13,7 @@ import com.example.domain.data.repository.LocalStorageRepository
 import com.example.domain.entity.ListElementEntity
 import com.example.domain.mapper.ListElementMapper
 import com.example.domain.mapper.Mapper
+import com.example.domain.usecase.ElementByIdFromCacheUseCase
 import com.example.domain.usecase.ElementByIdUseCase
 import com.example.domain.usecase.ListUseCase
 import com.example.firstapp.details.vm.DetailsViewModel
@@ -37,6 +38,7 @@ val appModule = module {
     single<ListRepository> { ListRepositoryImpl() }
     single { ListUseCase(get(), get()) }
     single { ElementByIdUseCase(get(), get(), get()) }
+    single { ElementByIdFromCacheUseCase(get(), get()) }
     single<Mapper<ListElement, ListElementEntity>> { ListElementMapper(get()) }
     viewModel { MainViewModel(get(), get(), get()) }
     viewModel { DetailsViewModel(get(), get(), get()) }
